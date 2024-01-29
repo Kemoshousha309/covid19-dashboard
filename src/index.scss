@@ -1,0 +1,80 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile_portrait {
+    @media (max-width: 325px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == mobile_landscape {
+    @media (max-width: 568px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet_portrait {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet_landscape {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == laptop {
+    @media (max-width: 1366px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == desktop {
+    @media (min-width: 1680px) {
+      @content;
+    }
+  }
+  
+}
+
+html {
+  font-size: 62.5%;
+  @include respond(desktop) {
+    font-size: 95%; // 12 * 1.6 = 19.2px
+  }
+  @include respond(laptop) {
+    font-size: 62.5%; // 10 * 1.6 = 16px
+  }
+  @include respond(tablet_landscape) {
+    font-size: 56.25%; // 9 * 1.6 = 14.4 px
+  }
+  @include respond(tablet_portrait) {
+    font-size: 50%; // 8 * 1.6 = 12.8 px
+  }
+  @include respond(mobile_landscape) {
+    font-size: 43.75%; // 7 * 1.6 = 11.2 px
+  }
+  @include respond(mobile_portrait) {
+    font-size: 37.5%; // 6 * 1.6 = 9.6 px
+  }
+}
+body {
+  font-size: 1.6rem;
+}
+
+
