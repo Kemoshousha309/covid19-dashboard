@@ -16,7 +16,6 @@ export function useGetStates() {
         if (states) {
         names = states.map((s) => [s.name as string, s.state as string]);
     }
-    console.log(names)
     return names;
   };
 

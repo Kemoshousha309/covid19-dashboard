@@ -3,9 +3,8 @@ import styled from "styled-components"
 export function Header() {
     return (
         <Container>
-            <h1>Covid-19 Statistics</h1>
-            <p>This app displays the statistics of COVID-19 in the United States.<br />
-                <span>These statistics are not updated since March 7, 2021 </span>
+            <h1>Covid-19 Dashboard</h1>
+            <p>This app displays the statistics of COVID-19 in the United States.
             </p>
         </Container>
     )
@@ -14,15 +13,20 @@ export function Header() {
 
 
 const Container = styled.header`
-    text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     & h1 {
+        font-size: 2.5rem;
         font-weight: 300;
         margin-bottom: 1rem;
     }
 
-    & p > span {
-        color: red;
-        font-size: 1.3rem;
+    & p {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: gray;
     }
+
 `

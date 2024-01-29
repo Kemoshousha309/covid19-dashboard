@@ -5,9 +5,9 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import { ThemeProvider, createTheme } from "@mui/material";
+import {  ThemeProvider, createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+export const theme = createTheme({
   typography: {
     body1: {
       fontSize: "1.6rem",
@@ -42,11 +42,7 @@ export default function StateSelectionDropdwon({
       <ThemeProvider theme={theme}>
         <FormControl
           sx={{
-            m: 1,
             width: "100%",
-            // [theme.breakpoints.down("md")]: {
-            //   width: "100%",
-            // },
           }}
         >
           <InputLabel id="select-label">Select states</InputLabel>

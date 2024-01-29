@@ -15,3 +15,11 @@ export interface State {
   historicalDatasets: Record[][] | null
 }
 
+export interface Field {
+  value: string;
+  error: boolean;
+  name: string;
+}
+export type Fields = Field[];
+
+

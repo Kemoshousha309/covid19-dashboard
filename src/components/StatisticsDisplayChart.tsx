@@ -1,22 +1,20 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js/auto";
-import { useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { labelMap } from "../utils/data";
-import { AppContext } from "../App";
 import { generateContrastingColor } from "../utils/helper";
 import styled from "styled-components";
+import { Record } from "../utils/types";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+interface StatisticsDisplayChartProps {
+  currentDatasets: Record[] | null
+}
 
-export function StatisticsDisplayChart() {
+export function StatisticsDisplayChart({currentDatasets}: StatisticsDisplayChartProps) {
 
-  const { currentDatasets } = useContext(AppContext);
-
-
-  if(!currentDatasets) return <h2>Loading Data ...</h2>
-  if (currentDatasets && currentDatasets?.length == 0)
-    return <h2>Select at least one state to view trends</h2>;
+  // i need this comp in comperasion only
+  if (!currentDatasets || currentDatasets?.length < 2) return null
 
   return (
     <ChartContainer>
@@ -26,7 +24,7 @@ export function StatisticsDisplayChart() {
           datasets: currentDatasets.map(ds => {
             const randomColor = generateContrastingColor();
             return {
-              label: ds.state,
+              label: ds.state as string,
               data: Object.values(labelMap).map(k => ds[k]),
               backgroundColor: randomColor,
               borderColor: randomColor,

@@ -9,7 +9,6 @@ type Mark = {
 
 export function useDateRange(datasets: Record[][]) {
   const [dateRange, setDateRange] = useState<number[]>([20, 37]);
-  const [dateMarks, setDateMarks] = useState<Mark []>([])
 
 
   const handleDateRangeChange = (event: Event, newValue: number[] | number) => {
@@ -28,18 +27,12 @@ export function useDateRange(datasets: Record[][]) {
     return getDataRange(ds, dateRange);
   });
 
-  // upate date marks to the maximum date range once 
-  if(dateMarks.length == 0) {
-    setDateMarks(prepareMarks(dataRanges[maxDsLenInx]));
-  } 
-
-  console.log({dateMarks})
 
   return {
     handleDateRangeChange,
-    chartDatesLabels: prepareDates(dataRanges[maxDsLenInx]),
+    chartDatesLabels: prepareDates(dataRanges[0]),
     dateRange,
-    datasets: dataRanges,
+    datasets: dataRanges.reverse(),
     marks: prepareMarks(datasets[maxDsLenInx]),
   };
 }
@@ -50,7 +43,7 @@ const prepareDates = (records: Record[]): string[] => {
   const decrement = 10;
   if (records) {
     for (let i = records.length - 1; i > 0; i -= decrement) {
-      dates.push(getDate(records[i].date, true));
+      dates.push(getDate(records[i].date as number, true));
     }
   }
   return dates;
@@ -67,13 +60,12 @@ const getDataRange = (dataset: Record[], dateRange: number[]) => {
 };
 
 const prepareMarks = (data: Record[]): Mark[] => {
-  console.log({data})
   const marks = [];
   const increment = 50;
   for (let i = 0; i < data.length; i += increment) {
     const mark = {
       value: Math.abs(Math.round(((i / data.length) * 100)-100)),
-      label: getDate(data[i].date, false),
+      label: getDate(data[i].date as number, false),
     };
     marks.push(mark);
   }

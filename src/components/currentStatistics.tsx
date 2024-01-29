@@ -30,8 +30,8 @@ export function CurrentStatistics({ record }: CurrentStatistics) {
   return (
     <Container>
       {dataMap.map((c) => {
-        if(!c.value) return null
-        return <Card label={c.label} value={c.value} Icon={c.Icon} />;
+        if(c.value == null) return null
+        return <Card key={c.label} label={c.label} value={c.value} Icon={c.Icon} />;
       })}
     </Container>
   );
