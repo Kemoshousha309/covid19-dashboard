@@ -4,8 +4,8 @@ import { Line } from "react-chartjs-2";
 import { generateContrastingColor } from "../utils/helper";
 import { useDateRange } from "../hooks/useHistoricalDateRange";
 import { ChartContainer } from "./StatisticsDisplayChart";
-import styled from "styled-components";
 import { Record } from "../utils/types";
+import { Mess } from "../utils/styles";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 interface HistoricalDataChartProps {
@@ -31,6 +31,10 @@ export function HistoricalDataChart({historicalDatasets}: HistoricalDataChartPro
         data={{
           labels: chartDatesLabels,
           datasets: datasets.map((ds) => {
+            if(ds.length == 0) return {
+              label: "state",
+              data: []
+            }
             const randomClr = generateContrastingColor();
             return {
               label: ds[0].state as string,
@@ -45,7 +49,7 @@ export function HistoricalDataChart({historicalDatasets}: HistoricalDataChartPro
             sx={{m: 3}}
             getAriaLabel={() => "Date range"}
             value={dateRange}
-            onChange={handleDateRangeChange}
+            onChange={(e, v) => handleDateRangeChange(v)}
             valueLabelDisplay="off"
             marks={marks}
             disableSwap
@@ -55,8 +59,3 @@ export function HistoricalDataChart({historicalDatasets}: HistoricalDataChartPro
 }
 
 
-// style 
-const Mess = styled.h2`
-  color: gray;
-  font-weight: 300;
-`

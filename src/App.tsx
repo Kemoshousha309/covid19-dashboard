@@ -13,27 +13,25 @@ import { Filter } from "./components/filter";
 import { useFilter } from "./hooks/userFilter";
 import { useGetAllStatesStatistics } from "./hooks/useGetAllStatesStatistics";
 import { useState } from "react";
+import { FilterResults } from "./components/filterRes";
 
 function Dashboard() {
-  const [isFilterUsed, setIsFilterUsed] = useState<boolean>(false)
+  const [isFilterUsed, setIsFilterUsed] = useState<boolean>(false);
 
   // HOOKS ********
   // fetch all states if only we use the filter other than that we should fetch each state independently
-  const {allStatesStatistics} = useGetAllStatesStatistics(isFilterUsed)
+  const { allStatesStatistics } = useGetAllStatesStatistics(isFilterUsed);
   // fetch all the states data to render the select drop down
   const { names } = useGetStates();
   const { currentStates, selectChangeHandler } = useSelectHandler();
-  // fetch the current state data state by state unless we got all of them when using filter
-  // if we got all the the state statistics after using filter we wouldn't fetch states any more
   const { displayedDatasets: currentDatasets } =
     useGetCurrentDatasets(currentStates);
 
   const { displayedDatasets: historicalDatasets } =
-    useGetHistoricalDatasets(currentStates);  
-  // 
-  const { filterHandler } = useFilter(allStatesStatistics);
-
-
+    useGetHistoricalDatasets(currentStates);
+  
+  const { filterHandler, loading, filterdData, parameters } =
+    useFilter(allStatesStatistics);
   // render the currect statics "cards"
   let currStateStatistics = null;
   if (currentDatasets?.length == 1) {
@@ -56,10 +54,17 @@ function Dashboard() {
         <StatisticsDisplayChart currentDatasets={currentDatasets} />
         <HistoricalDataChart historicalDatasets={historicalDatasets} />
       </Lower>
-      <Filter filterHandler={(parameters) => {
-        setIsFilterUsed(true)
-        filterHandler(parameters)
-      }} />
+      <Filter
+        filterHandler={(parameters) => {
+          setIsFilterUsed(true);
+          filterHandler(parameters);
+        }}
+      />
+      <FilterResults
+        loading={loading}
+        data={filterdData}
+        parameters={parameters}
+      />
       <Warning />
     </Wrapper>
   );

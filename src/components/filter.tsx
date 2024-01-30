@@ -12,7 +12,7 @@ import { useFromControls } from "../hooks/useFormControls";
 import { Fields } from "../utils/types";
 
 interface FilterProps {
-    filterHandler: (parameters: Fields) => void
+    filterHandler: (parameters: Fields) => void;
 }
 
 export function Filter({filterHandler}: FilterProps) {
@@ -94,7 +94,7 @@ const Container = styled.form`
   font-size: 2rem;
   font-weight: 300;
   color: #3d3d3d;
-  margin-bottom: 10rem;
+  margin-bottom: 3rem;
 
   & button {
     font-size: inherit;

@@ -38,7 +38,6 @@ export async function fetchHistoricalDatasets(states: string[]) {
         ).then((response) => response.json());
       })
     );
-    //   console.log({historical: datasets})
     return datasets as Record[][];
   } catch (error) {
     console.log(error);

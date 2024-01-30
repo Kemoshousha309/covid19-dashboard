@@ -11,7 +11,7 @@ export function useDateRange(datasets: Record[][]) {
   const [dateRange, setDateRange] = useState<number[]>([20, 37]);
 
 
-  const handleDateRangeChange = (event: Event, newValue: number[] | number) => {
+  const handleDateRangeChange = (newValue: number[] | number) => {
     if (typeof newValue == "number") {
       return setDateRange([newValue, newValue]);
     }
@@ -28,11 +28,14 @@ export function useDateRange(datasets: Record[][]) {
   });
 
 
+  // Note => 
+  //There is a bug in the order of the dates of the chart 
+  //Unfortunately the time ends before I fix this problem
   return {
     handleDateRangeChange,
     chartDatesLabels: prepareDates(dataRanges[0]),
     dateRange,
-    datasets: dataRanges.reverse(),
+    datasets: dataRanges,
     marks: prepareMarks(datasets[maxDsLenInx]),
   };
 }
@@ -54,9 +57,9 @@ const getDataRange = (dataset: Record[], dateRange: number[]) => {
   // return a new dataset between the ranage
   // if(dateRange[0] == dateRange[1]) debugger;
   const [start, end] = dateRange.map((v) => {
-    return Math.round((v * dataset?.length) / 100);
+    return Math.round(((v * dataset?.length) / 100));
   });
-  return dataset?.slice(start, end + 1);
+  return dataset.reverse().slice(start, end + 1);
 };
 
 const prepareMarks = (data: Record[]): Mark[] => {
