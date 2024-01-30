@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Covid-19 Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project is a dashboard that views COVID-19 statistics. First, you have to select a state to view the current and historical statistics for that state.
+> The app needs some need more improvements and optimizations but there is not enough time.
 
-Currently, two official plugins are available:
+## Historical Chart
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This chart presents positive cases of one or more states over time. 
+> There may be some issue in the date range, I didn't have enough time to fix this bug.
+> 
+## Latest statistics
 
-## Expanding the ESLint configuration
+First, you should select at least one state. If you select one state the app will view the current trends in the cards as we consider this to be your state, but if you select more than one state the state comparison mode will be activated and show a chart that compares between states based on the latest statistics. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Filter
 
-- Configure the top-level `parserOptions` property like this:
+The dashboard also provides a Filter which gives you the states with specific rules.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Setup instructions
+The App uses Vite as a build tool: 
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- run `yarn dev`  or `npm run dev` to start a dev server 
+
