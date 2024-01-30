@@ -17,7 +17,8 @@ First, you should select at least one state. If you select one state the app wil
 The dashboard also provides a Filter which gives you the states with specific rules.
 
 ## Setup instructions
-The App uses Vite as a build tool: 
+The App uses Vite as a build tool and Yarn as a package manager: 
 
-- run `yarn dev`  or `npm run dev` to start a dev server 
+- run `yarn` or `npm install` to install the dependencies 
+-  run `yarn dev`  or `npm run dev` to start a dev server 
 
